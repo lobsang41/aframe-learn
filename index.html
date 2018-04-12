@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+     <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+     <script src="https://unpkg.com/aframe-input-mapping-component/dist/aframe-input-mapping-component.min.js"></script>
+     <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
+     <script src="js/TestComponent.js"></script>
+     <script src="js/randomColor.js"></script>
+
+  </head>
+  <body>
+    <a-scene pool__enemy="mixin: enemy; size : 10">
+
+      <a-entity id="leftHand"
+          oculus-touch-controls="hand: left"
+          gearvr-controls="hand: left"
+          daydream-controls="hand: left"
+          vive-controls="hand: left">
+      </a-entity>
+      <a-entity id="rightHand"
+          oculus-touch-controls="hand: right"
+          gearvr-controls="hand: right"
+          daydream-controls="hand: right"
+          vive-controls="hand: right">
+      </a-entity>
+
+
+
+      <a-assets>
+          <a-mixin id="enemy">
+            <a-box random-color class="collidable" position="-1 -2 -3" rotation="0 45 0" color="#4CC3D9" scale="0.5 .5 .5" material="shader: standard" msg
+                    animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
+
+            ></a-box>
+          </a-mixin>
+      </a-assets>
+
+      <a-entity id="player" collider-check>
+        <a-camera position="0 1 0" >
+        <a-entity raycaster="enabled: true;  showLine: true; far: 350; objects: .collidable; direction: 0,0,0" position="0 -0.1 0" rotation="0 0 0" line="color: orange;"></a-entity>
+      </a-camera>
+      </a-entity>
+
+
+      <a-entity>
+        <a-box random-color class="collidable" position="-1 -2 -3" rotation="0 45 0" color="#4CC3D9" scale="0.5 .5 .5" material="shader: standard" msg
+                animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
+
+        ></a-box>
+      </a-entity>
+
+
+
+      <a-plane class="collidable" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" scale="10 10 10"></a-plane>
+
+
+
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+       <script src="js/keyboardInput.js"></script>
+</html>
