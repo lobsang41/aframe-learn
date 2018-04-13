@@ -10,10 +10,11 @@
      <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
      <script src="js/TestComponent.js"></script>
      <script src="js/randomColor.js"></script>
+     <script src="js/animation.js"></script>
 
   </head>
   <body>
-    <a-scene pool__enemy="mixin: enemy; size : 10">
+    <a-scene pool__enemy="mixin: enemy; size : 5">
 
       <a-entity id="leftHand"
           oculus-touch-controls="hand: left"
@@ -28,16 +29,25 @@
           vive-controls="hand: right">
       </a-entity>
 
+      <a-entity id="blockHand" hand-controls="right" controller-cursor></a-entity>
 
 
       <a-assets>
-          <a-mixin id="enemy">
-            <a-box random-color class="collidable" position="-1 -2 -3" rotation="0 45 0" color="#4CC3D9" scale="0.5 .5 .5" material="shader: standard" msg
-                    animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
+          <a-mixin id="enemy"
+              random-color class="collidable" rotation="0 45 0" color="#4CC3D9" scale="0.5 .5 .5"
+              material="shader: standard"
+              geometry="primitive: box; height: 0.5; width: 0.5; depth: 0.5"
 
-            ></a-box>
+              >
           </a-mixin>
+
+          <a-animation id="trans_up" attribute="position"
+               dur="3000"
+               fill="forwards"
+               to="0 50 0"
+               repeat="indefinite"></a-animation>
       </a-assets>
+
 
       <a-entity id="player" collider-check>
         <a-camera position="0 1 0" >
@@ -46,16 +56,9 @@
       </a-entity>
 
 
-      <a-entity>
-        <a-box random-color class="collidable" position="-1 -2 -3" rotation="0 45 0" color="#4CC3D9" scale="0.5 .5 .5" material="shader: standard" msg
-                animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
-
-        ></a-box>
-      </a-entity>
-
-
 
       <a-plane class="collidable" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" scale="10 10 10"></a-plane>
+
 
 
 

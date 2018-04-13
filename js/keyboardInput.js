@@ -55,7 +55,8 @@ var mappings = {
       },
       keyboard: {
         't_up': 'logdefault',
-        'c_up': 'changeTask'
+        'c_up': 'changeTask',
+        'p_up': 'fanny'
       }
     },
     task2: {
@@ -73,11 +74,13 @@ var mappings = {
       },
       keyboard: {
         'y_up': 'logtask2',
-        'c_up': 'changeTask'
+        'c_up': 'changeTask',
+        'p_up': 'fanny'
       }
     }
   }
 };
+// Se registran las teclas / botones de los controles
 AFRAME.registerInputMappings(mappings);
 
 var lastTimeout = null;
@@ -88,17 +91,116 @@ function drawText(message) {
     buttonsText.setAttribute('text', {value: ''});
   }, 1000);
 }
+
 function init()
 {
+  var EnemyTimerInterval = setInterval(EnemyCubeTimer, 1000);
+  EnemyCubeTimer();
 
 
 
 
+
+  //binding
   scene.addEventListener('changeTask', function(evt) {
+    SpawnEnemyCube();
+  });
+  // binding
+  scene.addEventListener('fanny', function(evt) {
+    var el = scene.components.pool__enemy.requestEntity();
 
-    console.log("Key c Pressed");
-
-
+    el.setAttribute('moveup',{message : "hello"});
+    //animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
+    //el.setAttribute('animation',{property: "position",dir:"alternate",dur:"3000",easing:"easeInSine",to:"-1 20 -3"});
   });
 
 }
+
+function SpawnEnemyCube(){
+  var EnemyCube = document.createElement('a-entity');
+  console.log("Spawneando enemigo");
+
+  // Use the mixin to make it a voxel.
+  EnemyCube.setAttribute('mixin', 'enemy');
+
+  EnemyCube.setAttribute('moveup',{message : "hello"});
+  // Set the position using intersection point. The `snap` component above which
+  // is part of the mixin will snap it to the closest half meter.
+  //newVoxelEl.setAttribute('position', evt.detail.intersection.point);
+
+  // Add to the scene with `appendChild`.
+  scene.appendChild(EnemyCube);
+
+}
+/////////////// pool
+
+
+
+  /*
+      scene.setAttribute('pool__' + mixinName,
+          {
+            size: item.poolSize,
+            mixin: mixinName,
+            dynamic: true
+          });
+
+          */
+          /*
+  returnEntity: function (name, entity) {
+    var mixinName = this.groupName + name;
+    var poolName = 'pool__' + mixinName;
+    this.sceneEl.components[poolName].returnEntity(entity);
+  },
+
+  requestEntity: function (name) {
+    var mixinName = this.groupName + name;
+    var poolName = 'pool__' + mixinName;
+    var entity = this.sceneEl.components[poolName].requestEntity();
+    // entity.id= this.groupName + Math.floor(Math.random() * 1000);
+    return entity;
+  }
+*/
+
+
+
+
+
+
+////////////////////
+
+
+
+
+
+
+
+function EnemyCubeTimer() {
+    //SpawnEnemyCube();
+}
+/*
+var lastBaseTimeout = null;
+function EnemyCubeTimer() {
+
+  clearTimeout(lastBaseTimeout);
+  lastBaseTimeout = setTimeout(() => {
+    SpawnEnemyCube();
+  }, 1000);
+}
+*/
+
+/*
+document.querySelector('#blockHand').addEventListener(`click`, function (evt) {
+  // Create a blank entity.
+  var EnemyCube = document.createElement('a-entity');
+
+  // Use the mixin to make it a voxel.
+  EnemyCube.setAttribute('mixin', 'voxel');
+
+  // Set the position using intersection point. The `snap` component above which
+  // is part of the mixin will snap it to the closest half meter.
+  //EnemyCube.setAttribute('position', evt.detail.intersection.point);
+  EnemyCube.setAttribute('moveup');
+  // Add to the scene with `appendChild`.
+  this.appendChild(EnemyCube);
+});
+*/
