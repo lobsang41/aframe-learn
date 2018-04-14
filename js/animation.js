@@ -1,7 +1,12 @@
+
+var temPos = 1;
+
 AFRAME.registerComponent('moveup', {
   schema: {
     message: {type: 'string', default: 'Hello, World!'}
 },
+
+
   init: function () {
         var scene = document.querySelector('a-scene');
         var el = this.el;
@@ -10,13 +15,14 @@ AFRAME.registerComponent('moveup', {
 
         var pos = {x: xPosition, y: 0, z: zPosition}
         var endPos = {x: xPosition, y: 50, z: zPosition}
+        temPos  = 0;
         //var pos = el.object3D.position.set(xPosition,0,zPosition);
         //el.setAttribute('position',{x: xPosition, y: 0, z : zPosition});
         el.setAttribute('position',pos);
       ///  animation__position="property: position; dir: alternate; dur: 3000;easing: easeInSine; loop: false;"
         //console.log(el.getAttribute('animation').to);
         //el.setAttribute('animation',{dir: "alternate", dur:3000 , to: {x: xPosition , y: 50, z: zPosition}});
-        el.setAttribute('animation',{autoplay : true,dir: "alternate", dur:3000 ,easing:'easeInSine', to: endPos});
+        //el.setAttribute('animation',{autoplay : true,dir: "alternate", dur:3000 ,easing:'easeInSine', to: endPos});
 
         /*
        el.setAttribute('animation__position', {'dir': 'alternate'});
@@ -30,7 +36,8 @@ AFRAME.registerComponent('moveup', {
         //el.setAttribute('animation__position', 'to', {x: 0 , y: 50, z: 0});
 
         var lastBaseTimeout = setTimeout(() => {
-            scene.components.pool__enemy.returnEntity(el)
+            //scene.components.pool__enemy.returnEntity(el)
+            el.parentNode.removeChild(el);
           }, 3000);
         //this.el.setAttribute('position', {x: currentPosition.x + directionVec3.x, y: currentPosition.y + directionVec3.y, z: currentPosition.z + directionVec3.z});
 
@@ -43,8 +50,8 @@ AFRAME.registerComponent('moveup', {
 
 
   },
-  tick: function () {
-    console.log(" tick de moveup");
+  tick: function (time, delta) {
+
   },
   remove: function () {},
   pause: function () {},

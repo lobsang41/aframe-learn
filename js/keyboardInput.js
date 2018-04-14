@@ -110,6 +110,12 @@ function init()
     var el = scene.components.pool__enemy.requestEntity();
 
     el.setAttribute('moveup',{message : "hello"});
+
+    el.setAttribute('animation', { 'property': 'position',
+                                     'from': StartPos,
+                                     'to': destinationStr,
+                                     'autoplay': true,
+                                     dur: 10000});
     //animation="property: position; dir: alternate; dur: 3000; easing: easeInSine; to: -1 20 -3"
     //el.setAttribute('animation',{property: "position",dir:"alternate",dur:"3000",easing:"easeInSine",to:"-1 20 -3"});
   });
@@ -124,6 +130,12 @@ function SpawnEnemyCube(){
   EnemyCube.setAttribute('mixin', 'enemy');
 
   EnemyCube.setAttribute('moveup',{message : "hello"});
+
+  var destinationStr = '0 ' + 50 + ' 0';
+  EnemyCube.setAttribute('animation', { 'property': 'position',
+                                   'to': destinationStr,
+                                   'autoplay': true,
+                                   dur: 10000});
   // Set the position using intersection point. The `snap` component above which
   // is part of the mixin will snap it to the closest half meter.
   //newVoxelEl.setAttribute('position', evt.detail.intersection.point);
