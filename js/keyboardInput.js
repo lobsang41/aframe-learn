@@ -187,7 +187,7 @@ function SpawnEnemyCube(){
 
 
 function EnemyCubeTimer() {
-    //SpawnEnemyCube();
+    SpawnEnemyCube();
 }
 /*
 var lastBaseTimeout = null;
